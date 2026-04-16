@@ -239,7 +239,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.95, opacity: 0 }}
-        className="bg-slate-900 rounded-lg w-full max-w-6xl max-h-[90vh] flex flex-col overflow-hidden"
+        className="bg-slate-900 rounded-lg w-full max-w-6xl max-h-[90vh] flex flex-col overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -358,20 +358,20 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
         </div>
 
         {/* Media Gallery */}
-        <div className="relative bg-black flex-shrink-0 max-h-96">
+        <div className="relative bg-black flex-1 min-h-[60vh]">
           {allMedia.length > 0 ? (
-            <div className="aspect-video max-h-96 relative">
+            <div className="w-full h-full min-h-[60vh] relative">
               {currentMedia?.type === 'image' ? (
                 <img
                   src={currentMedia.url}
                   alt={`${project.title} - Image ${currentMediaIndex + 1}`}
-                  className="w-full h-full max-h-96 object-contain"
+                  className="w-full h-full min-h-[60vh] object-contain"
                 />
               ) : (
                 <VideoPlayer
                   src={currentMedia.url}
                   title={`${project.title} - Video ${currentMediaIndex + 1}`}
-                  className="w-full h-full max-h-96"
+                  className="w-full h-full min-h-[60vh]"
                 />
               )}
 
@@ -408,7 +408,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
               </div>
             </div>
           ) : (
-            <div className="aspect-video max-h-96 flex items-center justify-center">
+            <div className="w-full min-h-[60vh] flex items-center justify-center">
               <p className="text-gray-400">No media available</p>
             </div>
           )}
