@@ -70,13 +70,15 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     }))
   ]
 
-  const currentMedia = allMedia[currentMediaIndex]
+  const currentMedia = allMedia[currentMediaIndex] || null
 
   const goToPrevious = () => {
+    if (allMedia.length === 0) return
     setCurrentMediaIndex((prev) => prev === 0 ? allMedia.length - 1 : prev - 1)
   }
 
   const goToNext = () => {
+    if (allMedia.length === 0) return
     setCurrentMediaIndex((prev) => prev === allMedia.length - 1 ? 0 : prev + 1)
   }
 
@@ -239,7 +241,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.95, opacity: 0 }}
-        className="bg-slate-900 rounded-lg w-full max-w-6xl max-h-[90vh] flex flex-col overflow-y-auto"
+        className="bg-slate-900 rounded-lg w-full max-w-6xl max-h-[90vh] flex flex-col overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -358,21 +360,29 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
         </div>
 
         {/* Media Gallery */}
-        <div className="relative bg-black flex-1 min-h-[60vh]">
+        <div className={`relative bg-black ${isEditing ? 'flex-shrink-0 max-h-64' : 'flex-1 min-h-[60vh] overflow-y-auto'}`}>
           {allMedia.length > 0 ? (
-            <div className="w-full h-full min-h-[60vh] relative">
+            <div className={`w-full ${isEditing ? 'max-h-64' : 'min-h-[60vh]'} relative flex items-center justify-center`}>
               {currentMedia?.type === 'image' ? (
-                <img
-                  src={currentMedia.url}
-                  alt={`${project.title} - Image ${currentMediaIndex + 1}`}
-                  className="w-full h-full min-h-[60vh] object-contain"
-                />
+                currentMedia?.url && (
+                  <img
+                    src={currentMedia.url}
+                    alt={`${project.title} - Image ${currentMediaIndex + 1}`}
+                    className={`max-w-full ${isEditing ? 'max-h-64' : 'max-h-[80vh]'} object-contain`}
+                  />
+                )
+              ) : currentMedia?.type === 'video' ? (
+                currentMedia?.url && (
+                  <VideoPlayer
+                    src={currentMedia.url}
+                    title={`${project.title} - Video ${currentMediaIndex + 1}`}
+                    className={`w-full ${isEditing ? 'max-h-64' : 'h-full min-h-[60vh]'}`}
+                  />
+                )
               ) : (
-                <VideoPlayer
-                  src={currentMedia.url}
-                  title={`${project.title} - Video ${currentMediaIndex + 1}`}
-                  className="w-full h-full min-h-[60vh]"
-                />
+                <div className="flex items-center justify-center h-full">
+                  <p className="text-gray-400">Media not available</p>
+                </div>
               )}
 
               {/* Navigation */}
@@ -380,13 +390,13 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 <>
                   <button
                     onClick={goToPrevious}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors z-10"
+                    className="fixed left-8 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors z-50"
                   >
                     <ChevronLeft className="h-5 w-5" />
                   </button>
                   <button
                     onClick={goToNext}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors z-10"
+                    className="fixed right-8 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors z-50"
                   >
                     <ChevronRight className="h-5 w-5" />
                   </button>
@@ -408,7 +418,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
               </div>
             </div>
           ) : (
-            <div className="w-full min-h-[60vh] flex items-center justify-center">
+            <div className={`w-full ${isEditing ? 'max-h-64' : 'min-h-[60vh]'} flex items-center justify-center`}>
               <p className="text-gray-400">No media available</p>
             </div>
           )}

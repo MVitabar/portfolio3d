@@ -23,6 +23,7 @@ export default function ProjectGallery() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedProjectForModal, setSelectedProjectForModal] = useState<Project | null>(null)
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false)
+  const [editingProject, setEditingProject] = useState<Project | null>(null)
   const { isAdmin } = useAuth()
 
   useEffect(() => {
@@ -91,8 +92,7 @@ export default function ProjectGallery() {
   }
 
   const handleProjectEdit = (project: Project) => {
-    setSelectedProjectForModal(project)
-    setIsProjectModalOpen(true)
+    setEditingProject(project)
   }
 
   const handleProjectDelete = (projectId: string) => {
@@ -198,7 +198,13 @@ export default function ProjectGallery() {
           onClose={closeProjectModal}
         />
 
-        <ProjectUpload onProjectUploaded={refreshProjects} />
+        <ProjectUpload 
+          onProjectUploaded={() => {
+            refreshProjects()
+            setEditingProject(null)
+          }} 
+          editProject={editingProject || undefined}
+        />
       </div>
     </section>
   )

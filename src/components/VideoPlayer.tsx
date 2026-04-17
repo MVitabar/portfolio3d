@@ -18,6 +18,7 @@ export default function VideoPlayer({ src, poster, title, className = '' }: Vide
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [showControls, setShowControls] = useState(true)
+  const [controlsTimeout, setControlsTimeout] = useState<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const video = videoRef.current
@@ -35,8 +36,11 @@ export default function VideoPlayer({ src, poster, title, className = '' }: Vide
       video.removeEventListener('timeupdate', updateTime)
       video.removeEventListener('loadedmetadata', updateDuration)
       video.removeEventListener('ended', handleEnded)
+      if (controlsTimeout) {
+        clearTimeout(controlsTimeout)
+      }
     }
-  }, [])
+  }, [controlsTimeout])
 
   const togglePlay = () => {
     const video = videoRef.current
@@ -87,6 +91,31 @@ export default function VideoPlayer({ src, poster, title, className = '' }: Vide
 
   const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0
 
+  const showControlsWithDelay = () => {
+    setShowControls(true)
+    if (controlsTimeout) {
+      clearTimeout(controlsTimeout)
+    }
+    const timeout = setTimeout(() => {
+      setShowControls(false)
+    }, 3000) // Hide after 3 seconds
+    setControlsTimeout(timeout)
+  }
+
+  const hideControlsImmediately = () => {
+    if (controlsTimeout) {
+      clearTimeout(controlsTimeout)
+    }
+    setShowControls(false)
+  }
+
+  const keepControlsVisible = () => {
+    if (controlsTimeout) {
+      clearTimeout(controlsTimeout)
+    }
+    setShowControls(true)
+  }
+
   return (
     <div className={`relative bg-black rounded-lg overflow-hidden group ${className}`}>
       <video
@@ -95,8 +124,9 @@ export default function VideoPlayer({ src, poster, title, className = '' }: Vide
         poster={poster}
         className="w-full h-full object-contain"
         onClick={togglePlay}
-        onMouseEnter={() => setShowControls(true)}
-        onMouseLeave={() => setShowControls(false)}
+        onMouseEnter={showControlsWithDelay}
+        onMouseLeave={hideControlsImmediately}
+        controls={false}
       />
       
       {/* Video Controls */}
@@ -104,6 +134,8 @@ export default function VideoPlayer({ src, poster, title, className = '' }: Vide
         className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 transition-opacity duration-300 ${
           showControls ? 'opacity-100' : 'opacity-0'
         }`}
+        onMouseEnter={keepControlsVisible}
+        onMouseLeave={showControlsWithDelay}
       >
         {/* Progress Bar */}
         <div className="mb-3">

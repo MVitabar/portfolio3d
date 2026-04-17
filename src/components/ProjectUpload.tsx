@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Upload, X, FileImage, Box, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -13,9 +13,10 @@ type Project = Database['public']['Tables']['projects']['Insert']
 
 interface ProjectUploadProps {
   onProjectUploaded?: () => void
+  editProject?: Database['public']['Tables']['projects']['Row']
 }
 
-export default function ProjectUpload({ onProjectUploaded }: ProjectUploadProps) {
+export default function ProjectUpload({ onProjectUploaded, editProject }: ProjectUploadProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
@@ -50,6 +51,24 @@ export default function ProjectUpload({ onProjectUploaded }: ProjectUploadProps)
     'animations',
     'concept-art'
   ]
+
+  // Populate form when editing
+  useEffect(() => {
+    if (editProject) {
+      setFormData({
+        id: editProject.id,
+        title: editProject.title,
+        description: editProject.description,
+        category: editProject.category,
+        featured: editProject.featured,
+        thumbnail_url: editProject.thumbnail_url,
+        model_url: editProject.model_url,
+        images: editProject.images,
+        videos: editProject.videos,
+        tags: editProject.tags || []
+      })
+    }
+  }, [editProject])
 
   // Add edit mode detection
   const isEditMode = !!formData.id
@@ -253,7 +272,9 @@ export default function ProjectUpload({ onProjectUploaded }: ProjectUploadProps)
       <div className="bg-slate-900 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-white">Upload New Project</h2>
+            <h2 className="text-2xl font-bold text-white">
+              {isEditMode ? 'Edit Project' : 'Upload New Project'}
+            </h2>
             <Button
               variant="ghost"
               size="icon"
@@ -455,10 +476,10 @@ export default function ProjectUpload({ onProjectUploaded }: ProjectUploadProps)
                 {isUploading ? (
                   <div className="flex items-center justify-center gap-2">
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    Uploading...
+                    {isEditMode ? 'Updating...' : 'Uploading...'}
                   </div>
                 ) : (
-                  'Upload Project'
+                  isEditMode ? 'Update Project' : 'Upload Project'
                 )}
               </Button>
               <Button

@@ -58,7 +58,7 @@ export default function Navbar() {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-purple-600/20"
+                  className="text-gray-300 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-white hover:bg-purple-600/20 md:hover:text-white md:hover:bg-purple-600/20"
                 >
                   {item.label}
                 </motion.a>
@@ -71,7 +71,7 @@ export default function Navbar() {
                       {user.email}
                     </span>
                     {isAdmin && (
-                      <Button variant="ghost" size="sm" className="text-purple-400 hover:text-purple-300">
+                      <Button variant="ghost" size="sm" className="text-purple-400 hover:text-purple-300 md:hover:text-purple-300">
                         <Settings className="h-4 w-4" />
                       </Button>
                     )}
@@ -79,7 +79,7 @@ export default function Navbar() {
                       variant="ghost" 
                       size="sm" 
                       onClick={signOut}
-                      className="text-red-400 hover:text-red-300"
+                      className="text-red-400 hover:text-red-300 md:hover:text-red-300"
                     >
                       <LogOut className="h-4 w-4" />
                     </Button>
@@ -89,7 +89,7 @@ export default function Navbar() {
                     variant="outline" 
                     size="sm" 
                     onClick={() => setShowLogin(true)}
-                    className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white"
+                    className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white md:hover:bg-purple-400 md:hover:text-white"
                   >
                     <User className="h-4 w-4 mr-2" />
                     Sign In
@@ -104,7 +104,7 @@ export default function Navbar() {
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white hover:bg-purple-600/20"
+              className="text-white hover:bg-purple-600/20 md:hover:bg-purple-600/20"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -113,7 +113,9 @@ export default function Navbar() {
       </div>
 
       <motion.div
-        className={`md:hidden ${scrolled ? 'bg-slate-900/95 backdrop-blur-md' : 'bg-slate-900'}`}
+        className={`md:hidden ${scrolled ? 'bg-slate-900/95 backdrop-blur-md' : 'bg-slate-900'} ${
+          isOpen ? '' : 'pointer-events-none'
+        }`}
         initial={{ opacity: 0, height: 0 }}
         animate={{ 
           opacity: isOpen ? 1 : 0, 
@@ -126,7 +128,7 @@ export default function Navbar() {
             <a
               key={item.label}
               href={item.href}
-              className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-purple-600/20 transition-colors duration-200"
+              className="text-gray-300 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 hover:text-white hover:bg-purple-600/20 md:hover:text-white md:hover:bg-purple-600/20"
               onClick={() => setIsOpen(false)}
             >
               <div className="flex items-center gap-2">
@@ -144,14 +146,14 @@ export default function Navbar() {
                   {user.email}
                 </div>
                 {isAdmin && (
-                  <button className="text-purple-400 hover:text-purple-300 block px-3 py-2 text-sm">
+                  <button className="text-purple-400 block px-3 py-2 text-sm hover:text-purple-300 md:hover:text-purple-300">
                     <Settings className="h-4 w-4 inline mr-2" />
                     Admin Settings
                   </button>
                 )}
                 <button 
                   onClick={() => { signOut(); setIsOpen(false); }}
-                  className="text-red-400 hover:text-red-300 block px-3 py-2 text-sm"
+                  className="text-red-400 block px-3 py-2 text-sm hover:text-red-300 md:hover:text-red-300"
                 >
                   <LogOut className="h-4 w-4 inline mr-2" />
                   Sign Out
@@ -160,7 +162,7 @@ export default function Navbar() {
             ) : (
               <button 
                 onClick={() => { setShowLogin(true); setIsOpen(false); }}
-                className="text-purple-400 hover:text-purple-300 block px-3 py-2 text-sm"
+                className="text-purple-400 block px-3 py-2 text-sm hover:text-purple-300 md:hover:text-purple-300"
               >
                 <User className="h-4 w-4 inline mr-2" />
                 Sign In
