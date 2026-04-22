@@ -1,12 +1,14 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowDown, Mail } from 'lucide-react'
+import { ArrowDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useState, useEffect } from 'react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false)
+  const { t } = useLanguage()
 
   useEffect(() => {
     setMounted(true)
@@ -102,7 +104,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/10 border border-purple-500/30 rounded-full mb-6"
             >
-              <span className="text-purple-300 text-sm font-medium font-sans">3D Artist & CGI Specialist</span>
+              <span className="text-purple-300 text-sm font-medium font-sans">{t('hero.badge')}</span>
             </motion.div>
 
             {/* Main Title */}
@@ -113,11 +115,11 @@ export default function Hero() {
               className="text-5xl md:text-7xl font-bold text-white mb-6 font-heading tracking-tight"
             >
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400">
-                3D Artist for
+                {t('hero.title')[0]}
               </span>
               <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400">
-                Product Visualization & CGI
+                {t('hero.title')[1]}
               </span>
             </motion.h1>
 
@@ -128,8 +130,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="text-xl text-gray-300 mb-8 leading-relaxed font-sans"
             >
-              I create high-end 3D visuals focused on lighting, materials and clean composition 
-              for brands, products and digital campaigns.
+              {t('hero.subtitle')}
             </motion.p>
 
             {/* CTA Buttons */}
@@ -149,7 +150,7 @@ export default function Hero() {
                 }}
                 className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-purple-500/25 transition-all duration-300 font-sans"
               >
-                View Work
+                {t('hero.viewWork')}
               </Button>
               <Button 
                 variant="outline" 
@@ -162,7 +163,7 @@ export default function Hero() {
                 }}
                 className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white px-8 py-4 rounded-lg transition-all duration-300 font-sans"
               >
-                Contact Me
+                {t('hero.contactMe')}
               </Button>
             </motion.div>
 
@@ -174,7 +175,7 @@ export default function Hero() {
               className="flex items-center gap-2 text-green-400 text-sm font-medium font-sans"
             >
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              Available for freelance work
+              {t('hero.available')}
             </motion.div>
 
                       </motion.div>

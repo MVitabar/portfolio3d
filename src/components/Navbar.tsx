@@ -5,13 +5,16 @@ import { motion } from 'framer-motion'
 import { Menu, X, Home, FolderOpen, Mail, User, LogOut, Settings } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/components/AuthProvider'
+import { useLanguage } from '@/contexts/LanguageContext'
 import LoginForm from '@/components/LoginForm'
+import LanguageSelector from '@/components/LanguageSelector'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
   const { user, isAdmin, signOut } = useAuth()
+  const { t } = useLanguage()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,10 +25,10 @@ export default function Navbar() {
   }, [])
 
   const navItems = [
-    { icon: Home, label: 'Home', href: '#home' },
-    { icon: FolderOpen, label: 'Portfolio', href: '#portfolio' },
-    { icon: User, label: 'About', href: '#about' },
-    { icon: Mail, label: 'Contact', href: '#contact' }
+    { icon: Home, label: t('nav.home'), href: '#home' },
+    { icon: FolderOpen, label: t('nav.portfolio'), href: '#portfolio' },
+    { icon: User, label: t('nav.about'), href: '#about' },
+    { icon: Mail, label: t('nav.contact'), href: '#contact' }
   ]
 
   return (
@@ -63,6 +66,11 @@ export default function Navbar() {
                   {item.label}
                 </motion.a>
               ))}
+              {/* Language Selector */}
+              <div className="flex items-center gap-2 pl-4 border-l border-gray-600">
+                <LanguageSelector />
+              </div>
+              
               {/* Auth Section */}
               <div className="flex items-center gap-2 pl-4 border-l border-gray-600">
                 {user ? (

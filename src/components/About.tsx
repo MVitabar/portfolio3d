@@ -1,8 +1,11 @@
 'use client'
 
 import { motion } from "framer-motion";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function About() {
+  const { t } = useLanguage()
+
   return (
     <section id="about" className="py-20 px-4 relative overflow-hidden">
       {/* Background to match other sections */}
@@ -25,7 +28,7 @@ export default function About() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            About
+            {t('about.title')}
           </h2>
         </motion.div>
 
@@ -38,13 +41,13 @@ export default function About() {
         >
           <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 md:p-12">
             <p className="text-xl text-gray-300 leading-relaxed mb-8">
-              I'm a 3D artist focused on creating clean, realistic and visually strong images.
-              My work centers around product visualization, lighting and composition, helping ideas 
-              translate into clear and engaging visuals.
+              {t('about.text1')}
+              {' '}
+              {t('about.text2')}
             </p>
             
             <p className="text-xl text-gray-300 leading-relaxed">
-              I'm currently available for freelance projects and collaborations.
+              {t('about.text3')}
             </p>
           </div>
         </motion.div>

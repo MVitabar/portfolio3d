@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Eye, ExternalLink, Calendar, Tag, Trash2, Edit, FileVideo } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import type { Database } from '@/lib/supabase'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { supabase } from '@/lib/supabase'
 
 type Project = Database['public']['Tables']['projects']['Row']
@@ -24,10 +25,11 @@ export default function AdminProjectCard({
   onProjectEdit,
   onProjectDelete 
 }: AdminProjectCardProps) {
+  const { t } = useLanguage()
   const [isDeleting, setIsDeleting] = useState(false)
 
   const handleDelete = async () => {
-    if (!confirm('Are you sure you want to delete this project? This action cannot be undone.')) {
+    if (!confirm(t('Are you sure you want to delete this project? This action cannot be undone.'))) {
       return
     }
 
@@ -199,7 +201,7 @@ export default function AdminProjectCard({
                 onClick={() => onView3D(project)}
               >
                 <Eye className="h-4 w-4 mr-2" />
-                View 3D
+                {t('portfolio.view3d')}
               </Button>
             )}
             <Button 
@@ -209,7 +211,7 @@ export default function AdminProjectCard({
               onClick={() => onProjectDetails(project)}
             >
               <ExternalLink className="h-4 w-4 mr-2" />
-              Details
+              {t('portfolio.details')}
             </Button>
           </div>
         </div>

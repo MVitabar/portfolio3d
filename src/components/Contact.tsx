@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Contact() {
+  const { t } = useLanguage()
+
   return (
     <section id="contact" className="py-20 px-4 relative overflow-hidden">
       {/* Dynamic Background with 3D Art */}
@@ -72,10 +75,10 @@ export default function Contact() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Let's Work Together
+            {t('contact.title')}
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Have a project or idea in mind? Feel free to reach out.
+            {t('contact.subtitle')}
           </p>
         </motion.div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -91,7 +94,7 @@ export default function Contact() {
                   <Mail className="h-8 w-8 text-purple-400" />
                 </div>
                 <div>
-                  <p className="font-semibold text-white text-lg">Email</p>
+                  <p className="font-semibold text-white text-lg">{t('contact.email')}</p>
                   <a 
                     href="mailto:vitabarmartin@gmail.com"
                     className="text-purple-300 hover:text-purple-200 transition-colors duration-200 text-lg"
@@ -105,7 +108,7 @@ export default function Contact() {
                   <Phone className="h-8 w-8 text-purple-400" />
                 </div>
                 <div>
-                  <p className="font-semibold text-white text-lg">Phone</p>
+                  <p className="font-semibold text-white text-lg">{t('contact.phone')}</p>
                   <a href="https://wa.me/5548996209954" target="_blank" rel="noopener noreferrer" className="text-purple-300 hover:text-purple-200 transition-colors duration-200 text-lg">
                     +55 (48) 99620-9954
                   </a>
@@ -116,7 +119,7 @@ export default function Contact() {
                   <MapPin className="h-8 w-8 text-purple-400" />
                 </div>
                 <div>
-                  <p className="font-semibold text-white text-lg">Location</p>
+                  <p className="font-semibold text-white text-lg">{t('contact.location')}</p>
                   <p className="text-lg">Brazil</p>
                 </div>
               </div>

@@ -12,6 +12,7 @@ import ProjectCard from '@/components/ProjectCard'
 import AdminProjectCard from '@/components/AdminProjectCard'
 import ProjectModal from '@/components/ProjectModal'
 import { useAuth } from '@/components/AuthProvider'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 type Project = Database['public']['Tables']['projects']['Row']
 
@@ -25,6 +26,7 @@ export default function ProjectGallery() {
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false)
   const [editingProject, setEditingProject] = useState<Project | null>(null)
   const { isAdmin } = useAuth()
+  const { t } = useLanguage()
 
   useEffect(() => {
     fetchProjects()
@@ -110,7 +112,7 @@ export default function ProjectGallery() {
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-white mb-4">Loading Projects...</h2>
+            <h2 className="text-4xl font-bold text-white mb-4">{t('portfolio.loading')}</h2>
           </div>
         </div>
       </section>
@@ -127,10 +129,10 @@ export default function ProjectGallery() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Selected Work
+            {t('portfolio.title')}
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            A curated selection of product visuals, CGI and animation projects.
+            {t('portfolio.subtitle')}
           </p>
         </motion.div>
 
@@ -181,7 +183,7 @@ export default function ProjectGallery() {
 
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-400 text-lg">No projects found in this category.</p>
+            <p className="text-gray-400 text-lg">{t('portfolio.noProjects')}</p>
           </div>
         )}
 

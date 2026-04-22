@@ -4,6 +4,8 @@ import { motion } from 'framer-motion'
 import { Eye, ExternalLink, Calendar, Tag, Play, FileVideo } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import VideoPlayer from '@/components/VideoPlayer'
+import type { Project } from '@/lib/supabase'
+import { useLanguage } from '@/contexts/LanguageContext'
 import type { Database } from '@/lib/supabase'
 
 type Project = Database['public']['Tables']['projects']['Row']
@@ -15,6 +17,7 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, onView3D, onProjectDetails }: ProjectCardProps) {
+  const { t } = useLanguage()
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     // Fallback to placeholder if image fails to load
     e.currentTarget.src = `https://picsum.photos/400/300?random=${project.id}`
@@ -92,7 +95,7 @@ export default function ProjectCard({ project, onView3D, onProjectDetails }: Pro
                 onClick={() => onView3D(project)}
               >
                 <Eye className="h-4 w-4 mr-2" />
-                View 3D
+                {t('portfolio.view3d')}
               </Button>
             )}
             <Button 
@@ -102,7 +105,7 @@ export default function ProjectCard({ project, onView3D, onProjectDetails }: Pro
               onClick={() => onProjectDetails?.(project)}
             >
               <ExternalLink className="h-4 w-4 mr-2" />
-              Details
+              {t('portfolio.details')}
             </Button>
           </div>
         </div>
