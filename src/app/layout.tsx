@@ -10,6 +10,11 @@ export const metadata: Metadata = {
   authors: [{ name: "M Vitabar" }],
   creator: "M Vitabar",
   publisher: "M Vitabar Studio",
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
+  },
   openGraph: {
     title: "M Vitabar | 3D Artist & CGI Specialist | Brazil",
     description: "Professional 3D artist creating photorealistic product visualizations and CGI solutions. Based in Brazil, serving global brands and agencies with premium 3D rendering services.",
