@@ -142,11 +142,80 @@ export const translations = {
     contact: {
       title: '¿Listo para dar vida a tu visión? Creemos algo excepcional juntos.',
       subtitle: 'Transforma tus conceptos en visuales 3D fotorrealistas que cautivan y convierten.',
-      startProject: '📩 Iniciar Proyecto',
-      bookConsultation: '📅 Reservar Consulta',
+      startProject: 'Iniciar Proyecto',
+      bookConsultation: 'Reservar Consulta',
       email: 'Correo',
       phone: 'Teléfono',
       location: 'Ubicación'
+    },
+    // Testimonials
+    testimonials: {
+      title: 'Lo que dicen los clientes',
+      subtitle: 'Confiado por marcas y agencias en todo el mundo',
+      items: [
+        {
+          name: 'Sarah Johnson',
+          company: 'TechCorp Industries',
+          text: 'Trabajar con Martín transformó nuestra visualización de productos. La atención al detalle y la calidad fotorrealista superaron nuestras expectativas. Nuestras tasas de conversión aumentaron un 40% después de implementar los nuevos renders.',
+          rating: 5
+        },
+        {
+          name: 'Michael Chen',
+          company: 'E-commerce Solutions Ltd',
+          text: 'Martín entregó visuales 3D excepcionales que capturaron perfectamente la esencia de nuestra marca. La comunicación fue fluida y los resultados finales fueron exactamente lo que necesitábamos para nuestro lanzamiento.',
+          rating: 5
+        },
+        {
+          name: 'Emma Rodriguez',
+          company: 'Creative Agency Brazil',
+          text: 'Como agencia, necesitamos socios confiables. Martín consistentemente entrega trabajo de alta calidad a tiempo. Su experiencia técnica y visión artística lo hacen nuestro artista 3D de referencia para proyectos complejos.',
+          rating: 5
+        }
+      ]
+    },
+    // Process
+    process: {
+      title: 'Cómo trabajamos juntos',
+      subtitle: 'Un proceso simplificado desde el concepto hasta la entrega',
+      steps: [
+        {
+          title: 'Brief',
+          description: 'Discutimos tu visión, requisitos y objetivos del proyecto para asegurar una alineación perfecta.'
+        },
+        {
+          title: 'Concepto',
+          description: 'Desarrollo conceptos iniciales y mood boards para establecer la dirección visual y enfoque artístico.'
+        },
+        {
+          title: 'Producción',
+          description: 'Producción 3D a escala completa con actualizaciones regulares y bucles de feedback para asegurar que superemos las expectativas.'
+        },
+        {
+          title: 'Entrega',
+          description: 'Entrega final de renders de alta resolución y assets, optimizados para tu caso de uso específico.'
+        }
+      ]
+    },
+    // Tools
+    tools: {
+      title: 'Experiencia Técnica',
+      subtitle: 'Herramientas y tecnologías profesionales que uso',
+      categories: {
+        modeling: 'Modelado 3D',
+        rendering: 'Rendering & Iluminación',
+        texturing: 'Texturizado & Materiales',
+        post: 'Post Producción'
+      },
+      items: [
+        { name: 'Blender', category: 'modeling', icon: 'blender' },
+        { name: 'Cinema 4D', category: 'modeling', icon: 'cinema4d' },
+        { name: 'Substance Painter', category: 'texturing', icon: 'substance' },
+        { name: 'Substance Designer', category: 'texturing', icon: 'substance' },
+        { name: 'After Effects', category: 'post', icon: 'aftereffects' },
+        { name: 'Photoshop', category: 'post', icon: 'photoshop' },
+        { name: 'Octane Render', category: 'rendering', icon: 'octane' },
+        { name: 'Redshift', category: 'rendering', icon: 'redshift' }
+      ]
     }
   },
   pt: {
@@ -187,11 +256,80 @@ export const translations = {
     contact: {
       title: 'Pronto para dar vida à sua visão? Vamos criar algo excepcional juntos.',
       subtitle: 'Transforme seus conceitos em visuais 3D fotorrealistas que cativam e convertem.',
-      startProject: '📩 Iniciar Projeto',
-      bookConsultation: '📅 Agendar Consulta',
+      startProject: 'Iniciar Projeto',
+      bookConsultation: 'Agendar Consulta',
       email: 'E-mail',
       phone: 'Telefone',
       location: 'Localização'
+    },
+    // Testimonials
+    testimonials: {
+      title: 'O que os clientes dizem',
+      subtitle: 'Confiado por marcas e agências em todo o mundo',
+      items: [
+        {
+          name: 'Sarah Johnson',
+          company: 'TechCorp Industries',
+          text: 'Trabalhar com Martín transformou nossa visualização de produtos. A atenção aos detalhes e a qualidade fotorrealista superaram nossas expectativas. Nossas taxas de conversão aumentaram 40% após implementar os novos renders.',
+          rating: 5
+        },
+        {
+          name: 'Michael Chen',
+          company: 'E-commerce Solutions Ltd',
+          text: 'Martín entregou visuais 3D excepcionais que capturaram perfeitamente a essência da nossa marca. A comunicação foi suave e os resultados finais foram exatamente o que precisávamos para nosso lançamento.',
+          rating: 5
+        },
+        {
+          name: 'Emma Rodriguez',
+          company: 'Creative Agency Brazil',
+          text: 'Como agência, precisamos de parceiros confiáveis. Martín consistentemente entrega trabalho de alta qualidade no prazo. Sua experiência técnica e visão artística o tornam nosso artista 3D de referência para projetos complexos.',
+          rating: 5
+        }
+      ]
+    },
+    // Process
+    process: {
+      title: 'Como trabalhamos juntos',
+      subtitle: 'Um processo simplificado do conceito à entrega',
+      steps: [
+        {
+          title: 'Brief',
+          description: 'Discutimos sua visão, requisitos e objetivos do projeto para garantir alinhamento perfeito.'
+        },
+        {
+          title: 'Conceito',
+          description: 'Desenvolvo conceitos iniciais e mood boards para estabelecer a direção visual e abordagem artística.'
+        },
+        {
+          title: 'Produção',
+          description: 'Produção 3D em escala completa com atualizações regulares e loops de feedback para garantir que superemos as expectativas.'
+        },
+        {
+          title: 'Entrega',
+          description: 'Entrega final de renders de alta resolução e assets, otimizados para seu caso de uso específico.'
+        }
+      ]
+    },
+    // Tools
+    tools: {
+      title: 'Experiência Técnica',
+      subtitle: 'Ferramentas e tecnologias profissionais que uso',
+      categories: {
+        modeling: 'Modelagem 3D',
+        rendering: 'Rendering & Iluminação',
+        texturing: 'Texturização & Materiais',
+        post: 'Pós-produção'
+      },
+      items: [
+        { name: 'Blender', category: 'modeling', icon: 'blender' },
+        { name: 'Cinema 4D', category: 'modeling', icon: 'cinema4d' },
+        { name: 'Substance Painter', category: 'texturing', icon: 'substance' },
+        { name: 'Substance Designer', category: 'texturing', icon: 'substance' },
+        { name: 'After Effects', category: 'post', icon: 'aftereffects' },
+        { name: 'Photoshop', category: 'post', icon: 'photoshop' },
+        { name: 'Octane Render', category: 'rendering', icon: 'octane' },
+        { name: 'Redshift', category: 'rendering', icon: 'redshift' }
+      ]
     }
   }
 }
