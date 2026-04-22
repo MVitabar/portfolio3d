@@ -25,9 +25,7 @@ export const metadata: Metadata = {
       }
     ],
     locale: "en_US",
-    type: "website",
-    category: "design",
-    tags: ["3D", "CGI", "Product Visualization", "Rendering", "Animation", "Brazil"]
+    type: "website"
   },
   twitter: {
     card: "summary_large_image",
