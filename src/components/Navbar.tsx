@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Menu, X, Home, FolderOpen, Mail, User, LogOut, Settings } from 'lucide-react'
+import { Menu, X, Home, FolderOpen, Mail, User, LogOut, Settings, Globe } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/components/AuthProvider'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -14,7 +14,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
   const { user, isAdmin, signOut } = useAuth()
-  const { t } = useLanguage()
+  const { t, language, setLanguage } = useLanguage()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -145,6 +145,36 @@ export default function Navbar() {
               </div>
             </a>
           ))}
+          
+          {/* Mobile Language Selector */}
+          <div className="border-t border-gray-700 pt-2 mt-2">
+            <div className="px-3 py-2">
+              <div className="flex items-center gap-2 text-gray-300 text-sm mb-2">
+                <Globe className="h-4 w-4" />
+                Language
+              </div>
+              <div className="space-y-1">
+                {[
+                  { code: 'en' as const, name: 'English', flag: 'EN' },
+                  { code: 'es' as const, name: 'Español', flag: 'ES' },
+                  { code: 'pt' as const, name: 'Português', flag: 'PT' }
+                ].map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => { setLanguage(lang.code); setIsOpen(false); }}
+                    className={`w-full flex items-center gap-3 px-3 py-2 text-sm rounded-md transition-colors duration-200 ${
+                      language === lang.code 
+                        ? 'bg-purple-600/20 text-purple-300' 
+                        : 'text-gray-300 hover:bg-slate-700/50 hover:text-white'
+                    }`}
+                  >
+                    <span className="text-sm font-bold">{lang.flag}</span>
+                    <span className="text-sm">{lang.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
           
           {/* Mobile Auth Section */}
           <div className="border-t border-gray-700 pt-2 mt-2">

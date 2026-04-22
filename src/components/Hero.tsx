@@ -17,7 +17,7 @@ export default function Hero() {
   if (!mounted) return null
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 lg:pt-0" style={{ zIndex: 40 }}>
       {/* Dynamic Background with 3D Art */}
       <div className="absolute inset-0">
         {/* Main Background Image */}
