@@ -4,7 +4,7 @@ export const translations = {
   en: {
     // Hero
     hero: {
-      badge: '3D Artist & CGI Specialist',
+      badge: 'M Vitabar - 3D Artist & CGI Specialist',
       title: ['3D Artist for', 'Product Visualization & CGI'],
       subtitle: 'I create high-end 3D visuals focused on lighting, materials and clean composition for brands, products and digital campaigns.',
       viewWork: 'View Work',
@@ -31,7 +31,7 @@ export const translations = {
     // About
     about: {
       title: 'About',
-      text1: "I'm a 3D artist focused on creating clean, realistic and visually strong images.",
+      text1: "I'm M Vitabar, a 3D artist focused on creating clean, realistic and visually strong images.",
       text2: "My work centers around product visualization, lighting and composition, helping ideas translate into clear and engaging visuals.",
       text3: "I'm currently available for freelance projects and collaborations."
     },
@@ -47,7 +47,7 @@ export const translations = {
   es: {
     // Hero
     hero: {
-      badge: 'Artista 3D y Especialista CGI',
+      badge: 'M Vitabar - Artista 3D y Especialista en CGI',
       title: ['Artista 3D para', 'Visualización de Productos y CGI'],
       subtitle: 'Creo visuales 3D de alta calidad enfocados en iluminación, materiales y composición limpia para marcas, productos y campañas digitales.',
       viewWork: 'Ver Trabajos',
@@ -74,7 +74,7 @@ export const translations = {
     // About
     about: {
       title: 'Acerca de',
-      text1: 'Soy un artista 3D enfocado en crear imágenes limpias, realistas y visualmente fuertes.',
+      text1: "Soy M Vitabar, un artista 3D enfocado en crear imágenes limpias, realistas y visualmente fuertes.",
       text2: 'Mi trabajo se centra en visualización de productos, iluminación y composición, ayudando a que las ideas se traduzcan en visuales claros y atractivos.',
       text3: 'Actualmente estoy disponible para proyectos freelance y colaboraciones.'
     },
@@ -90,7 +90,7 @@ export const translations = {
   pt: {
     // Hero
     hero: {
-      badge: 'Artista 3D e Especialista CGI',
+      badge: 'M Vitabar - Artista 3D e Especialista em CGI',
       title: ['Artista 3D para', 'Visualização de Produtos e CGI'],
       subtitle: 'Crio visuais 3D de alta qualidade focados em iluminação, materiais e composição limpa para marcas, produtos e campanhas digitais.',
       viewWork: 'Ver Trabalhos',
@@ -117,7 +117,7 @@ export const translations = {
     // About
     about: {
       title: 'Sobre',
-      text1: 'Sou um artista 3D focado em criar imagens limpas, realistas e visualmente fortes.',
+      text1: "Sou M Vitabar, um artista 3D focado em criar imagens limpas, realistas e visualmente fortes.",
       text2: 'Meu trabalho centra-se em visualização de produtos, iluminação e composição, ajudando ideias a se transformarem em visuais claros e envolventes.',
       text3: 'Atualmente estou disponível para projetos freelance e colaborações.'
     },

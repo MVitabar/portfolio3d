@@ -48,7 +48,7 @@ export default function Navbar() {
             className="flex-shrink-0"
           >
             <h1 className="text-2xl font-bold text-white bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-              3D Artist
+              M Vitabar
             </h1>
           </motion.div>
 

@@ -4,8 +4,8 @@ import { AuthProvider } from "@/components/AuthProvider";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 export const metadata: Metadata = {
-  title: "3D Artist Portfolio",
-  description: "Portfolio showcasing 3D art and animations",
+  title: "M Vitabar - 3D Artist Portfolio",
+  description: "M Vitabar - Portfolio showcasing 3D art and animations",
 };
 
 export default function RootLayout({
