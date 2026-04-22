@@ -113,7 +113,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="font-semibold text-white text-lg">Phone</p>
-                  <a href="tel:+5548996209954" className="text-purple-300 hover:text-purple-200 transition-colors duration-200 text-lg">
+                  <a href="https://wa.me/5548996209954" target="_blank" rel="noopener noreferrer" className="text-purple-300 hover:text-purple-200 transition-colors duration-200 text-lg">
                     +55 (48) 99620-9954
                   </a>
                 </div>

@@ -113,6 +113,24 @@ export default function AdminProjectCard({
     onProjectDetails(project)
   }
 
+  // Check if project has 3D models
+  const has3DModel = () => {
+    // Check main model_url
+    if (project.model_url) {
+      return true
+    }
+    
+    // Check for 3D models in images array
+    if (project.images && project.images.length > 0) {
+      const modelExtensions = ['.fbx', '.glb', '.gltf', '.obj', '.blend']
+      return project.images.some(img => 
+        modelExtensions.some(ext => img.toLowerCase().includes(ext))
+      )
+    }
+    
+    return false
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -174,9 +192,7 @@ export default function AdminProjectCard({
           )}
           
           <div className="flex gap-2">
-            {(project.model_url || (project.images?.some(img => 
-              ['.fbx', '.glb', '.gltf', '.obj', '.blend'].some(ext => img.toLowerCase().includes(ext))
-            )) && (
+            {has3DModel() && (
               <Button 
                 size="sm" 
                 className="bg-purple-600 hover:bg-purple-700"
@@ -185,9 +201,7 @@ export default function AdminProjectCard({
                 <Eye className="h-4 w-4 mr-2" />
                 View 3D
               </Button>
-            ))}
-            
-          <div>
+            )}
             <Button 
               size="sm" 
               variant="outline" 
@@ -198,7 +212,6 @@ export default function AdminProjectCard({
               Details
             </Button>
           </div>
-        </div>
         </div>
       </div>
       

@@ -6,7 +6,7 @@ import { BoxHelper } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
+import { HDRLoader } from 'three/examples/jsm/loaders/HDRLoader.js'
 import { Button } from '@/components/ui/button'
 import { X, Maximize2, RotateCcw } from 'lucide-react'
 
@@ -22,6 +22,7 @@ export default function ModelModal({ isOpen, onClose, modelUrl, title }: ModelMo
   const sceneRef = useRef<THREE.Scene | null>(null)
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
   const frameIdRef = useRef<number | null>(null)
+  const controlsRef = useRef<any>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -54,11 +55,15 @@ export default function ModelModal({ isOpen, onClose, modelUrl, title }: ModelMo
     const controls = new OrbitControls(camera, renderer.domElement)
     controls.enableDamping = true
     controls.dampingFactor = 0.05
-        controls.autoRotate = true
+    controls.autoRotate = true
     controls.autoRotateSpeed = 1
+    controls.target.set(0, 0, 0) // Set target to origin
+    
+    // Store controls in ref for later updates
+    controlsRef.current = controls
 
     // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8) // Increased intensity
     scene.add(ambientLight)
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2)
@@ -71,14 +76,19 @@ export default function ModelModal({ isOpen, onClose, modelUrl, title }: ModelMo
     pointLight.position.set(-5, 5, 0)
     scene.add(pointLight)
 
-    // Load environment map (using RGBELoader for now)
-    const rgbeLoader = new RGBELoader()
-    rgbeLoader.load(
+    // Load environment map (using HDRLoader)
+    const hdrLoader = new HDRLoader()
+    hdrLoader.load(
       'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_03_1k.hdr',
       (texture: any) => {
         texture.mapping = THREE.EquirectangularReflectionMapping
         scene.environment = texture
         scene.environmentIntensity = 0.5
+      },
+      undefined,
+      (error: any) => {
+        console.warn('HDR environment failed to load, using solid background:', error)
+        // Continue without environment map
       }
     )
 
@@ -92,6 +102,7 @@ export default function ModelModal({ isOpen, onClose, modelUrl, title }: ModelMo
       
       // Determine file type and use appropriate loader
       const fileExtension = firstModelUrl.split('.').pop()?.toLowerCase()
+      console.log('File extension detected:', fileExtension)
       
       if (fileExtension === 'fbx') {
         // Load FBX model
@@ -146,41 +157,98 @@ export default function ModelModal({ isOpen, onClose, modelUrl, title }: ModelMo
             setIsLoading(false)
           }
         )
-      } else {
+      } else if (fileExtension === 'glb' || fileExtension === 'gltf') {
         // Load GLTF/GLB model
+        console.log('Loading GLB model:', firstModelUrl)
         const gltfLoader = new GLTFLoader()
+        
+        // Set crossOrigin for texture loading
+        gltfLoader.setCrossOrigin('anonymous')
+        
         gltfLoader.load(
           firstModelUrl,
           (gltf: any) => {
+            console.log('GLB loaded successfully:', gltf)
             const model = gltf.scene
+            
+            // Check if model has materials and textures
+            let hasTextures = false
             model.traverse((child: any) => {
               if (child.isMesh) {
                 child.castShadow = true
                 child.receiveShadow = true
+                
+                // Check for materials and textures
+                if (child.material) {
+                  if (child.material.map) {
+                    hasTextures = true
+                    console.log('Found texture on mesh:', child.name)
+                  }
+                  if (child.material.normalMap) {
+                    console.log('Found normal map on mesh:', child.name)
+                  }
+                }
               }
             })
+            
+            console.log('Model has textures:', hasTextures)
             
             // Center and scale model
             const box = new THREE.Box3().setFromObject(model)
             const center = box.getCenter(new THREE.Vector3())
-            model.position.sub(center)
-            
             const size = box.getSize(new THREE.Vector3())
+            
+            console.log('Model size:', size)
+            console.log('Model center:', center)
+            
+            // Calculate appropriate scale first
             const maxDim = Math.max(size.x, size.y, size.z)
-            const scale = 2 / maxDim
+            const scale = 3 / maxDim // Increased scale for better visibility
             model.scale.multiplyScalar(scale)
+            
+            console.log('Applied scale:', scale)
+            
+            // Recalculate center after scaling
+            const scaledBox = new THREE.Box3().setFromObject(model)
+            const scaledCenter = scaledBox.getCenter(new THREE.Vector3())
+            
+            // Then center the model at origin (0, 0, 0) for better control
+            model.position.sub(scaledCenter)
+            
+            console.log('Scaled model center:', scaledCenter)
+            console.log('Model moved to origin:', model.position)
+            
+            // Position camera directly in front of the model (now at origin)
+            const distance = Math.max(size.x, size.y, size.z) * 0.2 // Better distance for viewing
+            camera.position.set(0, 0, distance) // In front of origin at ground level (Y=0)
+            camera.lookAt(0, 0, 0) // Look at origin where model is now centered
+            
+            // Update existing controls to look at origin
+            if (controlsRef.current) {
+              controlsRef.current.target.set(0, 0, 0)
+              controlsRef.current.update() // Force update of controls
+            }
+            
+            console.log('Camera position:', camera.position)
+            console.log('Camera looking at origin: (0, 0, 0)')
             
             scene.add(model)
             setIsLoading(false)
           },
           (progress: any) => {
-            // Progress tracking
+            console.log('Loading progress:', (progress.loaded / progress.total) * 100 + '%')
           },
           (error: any) => {
-                        createDefaultModel(scene)
+            console.error('Error loading GLB model:', error)
+            console.log('Falling back to default model')
+            createDefaultModel(scene)
             setIsLoading(false)
           }
         )
+      } else {
+        console.log('Unsupported file type:', fileExtension)
+        createDefaultModel(scene)
+        setIsLoading(false)
       }
     } else {
       createDefaultModel(scene)

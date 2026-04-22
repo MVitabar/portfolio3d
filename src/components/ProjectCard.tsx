@@ -28,6 +28,24 @@ export default function ProjectCard({ project, onView3D, onProjectDetails }: Pro
     onProjectDetails?.(project)
   }
 
+  // Check if project has 3D models
+  const has3DModel = () => {
+    // Check main model_url
+    if (project.model_url) {
+      return true
+    }
+    
+    // Check for 3D models in images array
+    if (project.images && project.images.length > 0) {
+      const modelExtensions = ['.fbx', '.glb', '.gltf', '.obj', '.blend']
+      return project.images.some(img => 
+        modelExtensions.some(ext => img.toLowerCase().includes(ext))
+      )
+    }
+    
+    return false
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -67,14 +85,16 @@ export default function ProjectCard({ project, onView3D, onProjectDetails }: Pro
           </div>
           
           <div className="flex gap-2">
-            <Button 
-              size="sm" 
-              className="bg-purple-600 hover:bg-purple-700"
-              onClick={() => onView3D(project)}
-            >
-              <Eye className="h-4 w-4 mr-2" />
-              View 3D
-            </Button>
+            {has3DModel() && (
+              <Button 
+                size="sm" 
+                className="bg-purple-600 hover:bg-purple-700"
+                onClick={() => onView3D(project)}
+              >
+                <Eye className="h-4 w-4 mr-2" />
+                View 3D
+              </Button>
+            )}
             <Button 
               size="sm" 
               variant="outline" 

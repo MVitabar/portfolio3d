@@ -198,13 +198,15 @@ export default function ProjectGallery() {
           onClose={closeProjectModal}
         />
 
-        <ProjectUpload 
-          onProjectUploaded={() => {
-            refreshProjects()
-            setEditingProject(null)
-          }} 
-          editProject={editingProject || undefined}
-        />
+        {isAdmin && (
+          <ProjectUpload 
+            onProjectUploaded={() => {
+              refreshProjects()
+              setEditingProject(null)
+            }} 
+            editProject={editingProject || undefined}
+          />
+        )}
       </div>
     </section>
   )
