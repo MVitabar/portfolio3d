@@ -8,6 +8,16 @@ import { useLanguage } from '@/contexts/LanguageContext';
 export default function Contact() {
   const { t } = useLanguage()
 
+  const handleStartProject = () => {
+    // TODO: Implement project start functionality
+    window.location.href = 'mailto:contact@mvitabar.com?subject=New Project Inquiry&body=Hi Martín, I would like to start a new project...'
+  }
+
+  const handleBookConsultation = () => {
+    // TODO: Implement consultation booking
+    window.location.href = 'mailto:contact@mvitabar.com?subject=Consultation Booking&body=Hi Martín, I would like to book a consultation...'
+  }
+
   return (
     <section id="contact" className="py-20 px-4 relative overflow-hidden">
       {/* Dynamic Background with 3D Art */}

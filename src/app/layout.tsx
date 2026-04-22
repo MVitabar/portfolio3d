@@ -4,8 +4,8 @@ import { AuthProvider } from "@/components/AuthProvider";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 export const metadata: Metadata = {
-  title: "M Vitabar - 3D Artist Portfolio",
-  description: "M Vitabar - Portfolio showcasing 3D art and animations",
+  title: "M Vitabar - 3D Product Visualization Artist | CGI Specialist for E-commerce",
+  description: "Freelance 3D artist Brazil offering photorealistic rendering services and CGI solutions for e-commerce, advertising, and product visualization. Transform your concepts into compelling 3D visuals.",
 };
 
 export default function RootLayout({
