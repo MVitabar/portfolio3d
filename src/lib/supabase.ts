@@ -78,3 +78,6 @@ export type Database = {
     }
   }
 }
+
+// Export Project type for convenience
+export type Project = Database['public']['Tables']['projects']['Row']

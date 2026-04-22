@@ -6,9 +6,6 @@ import { Button } from '@/components/ui/button'
 import VideoPlayer from '@/components/VideoPlayer'
 import type { Project } from '@/lib/supabase'
 import { useLanguage } from '@/contexts/LanguageContext'
-import type { Database } from '@/lib/supabase'
-
-type Project = Database['public']['Tables']['projects']['Row']
 
 interface ProjectCardProps {
   project: Project
