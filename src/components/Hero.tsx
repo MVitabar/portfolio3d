@@ -102,7 +102,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/10 border border-purple-500/30 rounded-full mb-6"
             >
-              <span className="text-purple-300 text-sm font-medium font-sans">Professional 3D Artist</span>
+              <span className="text-purple-300 text-sm font-medium font-sans">3D Artist & CGI Specialist</span>
             </motion.div>
 
             {/* Main Title */}
@@ -113,11 +113,11 @@ export default function Hero() {
               className="text-5xl md:text-7xl font-bold text-white mb-6 font-heading tracking-tight"
             >
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400">
-                Creating
+                3D Artist for
               </span>
               <br />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400">
-                Digital Worlds
+                Product Visualization & CGI
               </span>
             </motion.h1>
 
@@ -128,9 +128,8 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="text-xl text-gray-300 mb-8 leading-relaxed font-sans"
             >
-              Specialized in 3D modeling, animation, and visual effects. 
-              Transforming creative visions into immersive digital experiences 
-              with cutting-edge technology and artistic expertise.
+              I create high-end 3D visuals focused on lighting, materials and clean composition 
+              for brands, products and digital campaigns.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -150,7 +149,7 @@ export default function Hero() {
                 }}
                 className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-purple-500/25 transition-all duration-300 font-sans"
               >
-                View Portfolio
+                View Work
               </Button>
               <Button 
                 variant="outline" 
@@ -163,8 +162,19 @@ export default function Hero() {
                 }}
                 className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white px-8 py-4 rounded-lg transition-all duration-300 font-sans"
               >
-                Get In Touch
+                Contact Me
               </Button>
+            </motion.div>
+
+            {/* Availability Status */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+              className="flex items-center gap-2 text-green-400 text-sm font-medium font-sans"
+            >
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              Available for freelance work
             </motion.div>
 
                       </motion.div>
@@ -247,10 +257,10 @@ export default function Hero() {
             {/* Expertise Cards */}
             <div className="grid grid-cols-2 gap-4 mt-12">
               {[
-                { label: '3D Modeling', value: 'Blender', color: 'purple' },
-                { label: 'Rendering', value: 'Cycles', color: 'blue' },
-                { label: 'Animation', value: 'Keyframes', color: 'pink' },
-                { label: 'Experience', value: '5+ Years', color: 'cyan' }
+                { label: 'Lighting', value: 'Studio', color: 'purple' },
+                { label: 'Materials', value: 'PBR', color: 'blue' },
+                { label: 'Rendering', value: 'Photoreal', color: 'pink' },
+                { label: 'Composition', value: 'Clean', color: 'cyan' }
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}

@@ -72,10 +72,10 @@ export default function Contact() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Get In Touch
+            Let's Work Together
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Have a project in mind? Let's create something amazing together
+            Have a project or idea in mind? Feel free to reach out.
           </p>
         </motion.div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -85,14 +85,7 @@ export default function Contact() {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div>
-              <h3 className="text-3xl font-bold text-white mb-8">Let's Connect</h3>
-              <p className="text-gray-300 text-lg mb-12">
-                I'm always interested in hearing about new projects and opportunities. 
-                Whether you have a question or just want to say hi, feel free to reach out!
-              </p>
-            </div>
-            <div className="space-y-6">
+                        <div className="space-y-6">
               <div className="flex items-center gap-6 text-gray-300 p-6 bg-slate-800/30 rounded-xl backdrop-blur-sm">
                 <div className="w-16 h-16 bg-purple-600/20 rounded-xl flex items-center justify-center">
                   <Mail className="h-8 w-8 text-purple-400" />

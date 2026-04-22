@@ -83,7 +83,7 @@ export default function ModelModal({ isOpen, onClose, modelUrl, title }: ModelMo
       (texture: any) => {
         texture.mapping = THREE.EquirectangularReflectionMapping
         scene.environment = texture
-        scene.environmentIntensity = 0.5
+        scene.environmentIntensity = 1.0 // Increased for better material visibility
       },
       undefined,
       (error: any) => {
@@ -171,27 +171,44 @@ export default function ModelModal({ isOpen, onClose, modelUrl, title }: ModelMo
             console.log('GLB loaded successfully:', gltf)
             const model = gltf.scene
             
-            // Check if model has materials and textures
-            let hasTextures = false
+            // Configure materials for all meshes
             model.traverse((child: any) => {
               if (child.isMesh) {
                 child.castShadow = true
                 child.receiveShadow = true
                 
-                // Check for materials and textures
+                // Configure material for better visibility
                 if (child.material) {
+                  // Enable material features
+                  child.material.needsUpdate = true
+                  child.material.transparent = false
+                  child.material.side = THREE.FrontSide
+                  
+                  // Check for materials and textures
                   if (child.material.map) {
-                    hasTextures = true
                     console.log('Found texture on mesh:', child.name)
+                    child.material.map.colorSpace = THREE.SRGBColorSpace
+                    child.material.needsUpdate = true
                   }
                   if (child.material.normalMap) {
                     console.log('Found normal map on mesh:', child.name)
                   }
+                  
+                  // Ensure material is properly configured
+                  if (child.material.color) {
+                    console.log('Material color for mesh:', child.name, child.material.color.getHex())
+                  }
+                } else {
+                  // Add default material if none exists
+                  child.material = new THREE.MeshStandardMaterial({
+                    color: 0x888888,
+                    metalness: 0.1,
+                    roughness: 0.7
+                  })
+                  console.log('Added default material to mesh:', child.name)
                 }
               }
             })
-            
-            console.log('Model has textures:', hasTextures)
             
             // Center and scale model
             const box = new THREE.Box3().setFromObject(model)

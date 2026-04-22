@@ -127,10 +127,10 @@ export default function ProjectGallery() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            My Portfolio
+            Selected Work
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Explore my collection of 3D artworks and animations
+            A curated selection of product visuals, CGI and animation projects.
           </p>
         </motion.div>
 
